@@ -38,6 +38,22 @@ defmodule DreamsBankApi.Accounts do
   def get_account!(id), do: Repo.get!(Account, id)
 
   @doc """
+  Gets a single account by his number account.
+
+  Raises `Ecto.NoResultsError` if the Account does not exist.
+
+  ## Examples
+
+      iex> get_account_by_number!("0034562-3")
+      %Account{}
+
+      iex> get_account_by_number!("456")
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_account_by_number!(number_account), do: Repo.get_by!(Account, number: number_account)
+
+  @doc """
   Creates a account.
 
   ## Examples
