@@ -7,5 +7,7 @@ defmodule DreamsBankApiWeb.Router do
 
   scope "/api", DreamsBankApiWeb do
     pipe_through :api
+
+    resources "/accounts", AccountController, except: [:new, :edit]
   end
 end

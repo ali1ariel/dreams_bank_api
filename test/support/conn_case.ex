@@ -28,6 +28,7 @@ defmodule DreamsBankApiWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import DreamsBankApiWeb.ConnCase
+      import DreamsBankApi.Factory
     end
   end
 
