@@ -35,4 +35,29 @@ defmodule DreamsBankApi.Accounts.UpdatingAndDeleteTest do
       end
     end
   end
+
+  describe "changing  an account" do
+    test "change_account/2 with valid data changes an account" do
+      account = insert(:account)
+      new_owner = "New Owner"
+      new_balance = Decimal.new("5000.00")
+
+      changeset =
+        Accounts.change_account(account, %{owner: new_owner, balance: new_balance})
+
+      assert changeset.data.owner == account.owner
+      assert changeset.data.balance == account.balance
+      assert changeset.changes.owner == new_owner
+      assert changeset.changes.balance == new_balance
+    end
+
+    test "change_account/2 with invalid data returns error changeset" do
+      account = insert(:account)
+
+      changeset =
+        Accounts.change_account(account, %{balance: Decimal.new("-1000.00")})
+
+      assert "must be greater than or equal to 0" in errors_on(changeset).balance
+    end
+  end
 end
