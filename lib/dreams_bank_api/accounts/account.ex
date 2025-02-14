@@ -1,4 +1,7 @@
 defmodule DreamsBankApi.Accounts.Account do
+  @moduledoc """
+  The schema for the accounts table.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -18,5 +21,6 @@ defmodule DreamsBankApi.Accounts.Account do
     |> cast(attrs, [:number, :owner, :balance])
     |> validate_required([:number, :owner, :balance])
     |> unique_constraint(:number)
+    |> validate_number(:balance, greater_than_or_equal_to: 0)
   end
 end

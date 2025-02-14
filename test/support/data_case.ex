@@ -25,6 +25,7 @@ defmodule DreamsBankApi.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import DreamsBankApi.DataCase
+      import DreamsBankApi.Factory
     end
   end
 
