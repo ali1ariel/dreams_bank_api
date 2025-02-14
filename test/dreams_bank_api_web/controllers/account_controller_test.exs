@@ -15,7 +15,8 @@ defmodule DreamsBankApiWeb.AccountControllerTest do
                "id" => account.id,
                "type" => "account",
                "owner" => "Teste 00",
-               "balance" => "100"
+               "balance" => "100",
+               "number" => account.number
              }
            }
   end
@@ -47,7 +48,8 @@ defmodule DreamsBankApiWeb.AccountControllerTest do
                "id" => account.id,
                "type" => "account",
                "owner" => "Teste 01",
-               "balance" => "200"
+               "balance" => "200",
+               "number" => account.number
              }
            }
   end
@@ -56,5 +58,20 @@ defmodule DreamsBankApiWeb.AccountControllerTest do
     account = insert(:account, %{owner: "Teste 00", balance: 100})
     conn = delete(build_conn(), ~p"/api/accounts/#{account.id}")
     assert response(conn, 204) == ""
+  end
+
+  test "show account by number" do
+    account = insert(:account, %{owner: "Teste 00", balance: 100})
+    conn = get(build_conn(), ~p"/api/accounts/number/#{account.number}")
+
+    assert json_response(conn, 200) == %{
+             "data" => %{
+               "id" => account.id,
+               "type" => "account",
+               "owner" => "Teste 00",
+               "balance" => "100",
+               "number" => account.number
+             }
+           }
   end
 end

@@ -46,4 +46,9 @@ defmodule DreamsBankApiWeb.AccountController do
     Accounts.delete_account(account)
     send_resp(conn, :no_content, "")
   end
+
+  def show_by_number(conn, %{"number" => number}) do
+    account = Accounts.get_account_by_number!(number)
+    render(conn, "show.json", account: account)
+  end
 end

@@ -9,12 +9,13 @@ defmodule DreamsBankApiWeb.AccountJSON do
     %{data: account(account)}
   end
 
-  defp account(%Account{id: id, owner: name, balance: balance}) do
+  defp account(%Account{id: id, owner: name, balance: balance, number: number}) do
     %{
       id: id,
       type: "account",
       owner: name,
-      balance: balance
+      balance: balance,
+      number: number
     }
   end
 end
