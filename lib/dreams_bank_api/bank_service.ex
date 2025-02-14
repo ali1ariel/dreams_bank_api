@@ -1,4 +1,7 @@
 defmodule DreamsBankApi.BankService do
+  @moduledoc """
+  This module provides a service layer for the bank operations.
+  """
   alias DreamsBankApi.Accounts
   alias DreamsBankApi.Accounts.Account
   alias DreamsBankApi.BankOperations
