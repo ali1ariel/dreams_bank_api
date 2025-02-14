@@ -9,7 +9,14 @@ defmodule DreamsBankApi.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -41,7 +48,12 @@ defmodule DreamsBankApi.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:faker, "~> 0.15.0"},
+      {:excoveralls, "~> 0.14", only: :test},
+      {:credo, "~> 1.5", only: [:dev, :test]},
+      {:ex_machina, "~> 2.6", only: :test},
+      {:ex_doc, "~> 0.31.0"}
     ]
   end
 
@@ -56,7 +68,8 @@ defmodule DreamsBankApi.MixProject do
       setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      check: ["format", "credo --strict"]
     ]
   end
 end
