@@ -25,7 +25,8 @@ defmodule DreamsBankApi.Accounts.ListingAndSearchingTest do
     end
 
     test "get_account_by_number!/1 returns an account" do
-      account = insert(:account)
+      account =
+        insert(:account)
 
       assert account == Accounts.get_account_by_number!(account.number)
     end

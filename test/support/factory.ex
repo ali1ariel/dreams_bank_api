@@ -6,7 +6,7 @@ defmodule DreamsBankApi.Factory do
 
   def account_factory do
     %DreamsBankApi.Accounts.Account{
-      number: sequence(:number, &"#{get_random_numbers(7)}-#{&1}"),
+      number: sequence(:number, fn _ -> "#{get_random_numbers(7)}-#{get_random_numbers(1)}" end),
       owner: sequence(:owner, &"Owner #{&1}"),
       balance: Decimal.new("1000.00")
     }

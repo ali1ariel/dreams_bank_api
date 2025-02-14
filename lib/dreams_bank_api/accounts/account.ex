@@ -18,9 +18,24 @@ defmodule DreamsBankApi.Accounts.Account do
   @doc false
   def changeset(account, attrs) do
     account
-    |> cast(attrs, [:number, :owner, :balance])
-    |> validate_required([:number, :owner, :balance])
+    |> cast(attrs, [:owner, :balance])
+    |> validate_required([:owner, :balance])
+    |> put_number_account(account.number)
     |> unique_constraint(:number)
     |> validate_number(:balance, greater_than_or_equal_to: 0)
+  end
+
+  def put_number_account(changeset, nil) do
+    changeset
+    |> put_change(:number, "#{get_random_numbers(7)}-#{get_random_numbers(1)}")
+  end
+
+  def put_number_account(changeset, _) do
+    changeset
+  end
+
+  def get_random_numbers(quantity) do
+    1..quantity
+    |> Enum.map_join(fn _ -> :rand.uniform(9) end)
   end
 end
