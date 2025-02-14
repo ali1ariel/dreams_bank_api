@@ -49,6 +49,16 @@ defmodule DreamsBankApi.Accounts.Account do
     |> validate_number(:deposit, greater_than_or_equal_to: 0)
   end
 
+  @doc false
+  def withdrawal(account, amount) do
+    new_amount = Decimal.mult(amount, -1)
+
+    account
+    |> change_balance(new_amount)
+    |> put_change(:withdrawal, new_amount)
+    |> validate_number(:withdrawal, less_than_or_equal_to: 0)
+  end
+
   defp change_balance(account, amount) do
     new_balance = Decimal.add(account.balance, amount)
 
