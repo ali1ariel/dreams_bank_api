@@ -1,9 +1,7 @@
 {
     "skip_files": [
         "lib/dreams_bank_api/repo.ex",
-        "lib/dreams_bank_api_web/router.ex",
         "lib/dreams_bank_api_web/telemetry.ex",
-        "lib/dreams_bank_api_web/endpoint.ex",
         "test"
     ]
 }
