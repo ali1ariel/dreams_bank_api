@@ -34,6 +34,14 @@ defmodule DreamsBankApiWeb.AccountControllerTest do
            } = json_response(conn, 201)
   end
 
+  test "create account with invalid data" do
+    conn = post(build_conn(), "/api/accounts", %{account: %{owner: "Teste 00", balance: "-100"}})
+
+    assert %{
+             "errors" => _
+           } = json_response(conn, 422)
+  end
+
   test "update account" do
     account = insert(:account, %{owner: "Teste 00", balance: 100})
 
@@ -52,6 +60,20 @@ defmodule DreamsBankApiWeb.AccountControllerTest do
                "number" => account.number
              }
            }
+  end
+
+  test "update account with invalid data" do
+    account = insert(:account, %{owner: "Teste 00", balance: 100})
+
+    conn =
+      put(build_conn(), ~p"/api/accounts/#{account.id}", %{
+        id: account.id,
+        account: %{owner: "Teste 01", balance: -200}
+      })
+
+    assert %{
+             "errors" => _
+           } = json_response(conn, 422)
   end
 
   test "delete account" do

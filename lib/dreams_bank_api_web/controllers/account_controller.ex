@@ -23,7 +23,7 @@ defmodule DreamsBankApiWeb.AccountController do
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render("error.json", changeset: changeset)
+        |> render(:unprocessable_entity, changeset: changeset)
     end
   end
 
@@ -37,7 +37,7 @@ defmodule DreamsBankApiWeb.AccountController do
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render("error.json", changeset: changeset)
+        |> render(:unprocessable_entity, changeset: changeset)
     end
   end
 

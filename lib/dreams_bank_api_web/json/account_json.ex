@@ -18,4 +18,8 @@ defmodule DreamsBankApiWeb.AccountJSON do
       number: number
     }
   end
+
+  def unprocessable_entity(%{changeset: changeset}) do
+    %{errors: inspect(changeset.errors)}
+  end
 end
