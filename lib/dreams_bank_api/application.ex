@@ -7,7 +7,10 @@ defmodule DreamsBankApi.Application do
 
   @impl true
   def start(_type, _args) do
+    topologies = application_topologies()
+
     children = [
+      {Cluster.Supervisor, [topologies, [name: DreamsBankApi.ClusterSupervisor]]},
       DreamsBankApiWeb.Telemetry,
       DreamsBankApi.Repo,
       {DNSCluster, query: Application.get_env(:dreams_bank_api, :dns_cluster_query) || :ignore},
@@ -34,4 +37,19 @@ defmodule DreamsBankApi.Application do
   end
 
   # coveralls-ignore-stop
+
+  defp application_topologies do
+    [
+      dreams_bank: [
+        strategy: Cluster.Strategy.Gossip,
+        config: [
+          port: 45892,
+          if_addr: "0.0.0.0",
+          multicast_if: "0.0.0.0",
+          multicast_addr: "230.1.1.1",
+          multicast_ttl: 1
+        ]
+      ]
+    ]
+  end
 end

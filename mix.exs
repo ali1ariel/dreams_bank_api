@@ -53,7 +53,8 @@ defmodule DreamsBankApi.MixProject do
       {:excoveralls, "~> 0.14", only: :test},
       {:credo, "~> 1.5", only: [:dev, :test]},
       {:ex_machina, "~> 2.6", only: :test},
-      {:ex_doc, "~> 0.31.0"}
+      {:ex_doc, "~> 0.31.0"},
+      {:libcluster, "~> 3.5"}
     ]
   end
 
