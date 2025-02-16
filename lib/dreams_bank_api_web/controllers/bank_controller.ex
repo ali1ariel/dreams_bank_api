@@ -79,5 +79,5 @@ defmodule DreamsBankApiWeb.BankController do
     end
   end
 
-  def process_cluster(node)
+  # def process_cluster(node)
 end

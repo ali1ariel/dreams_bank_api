@@ -16,3 +16,6 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+
+[![Coverage Status](https://coveralls.io/repos/github/ali1ariel/dreams_bank_api/badge.svg?branch=main)](https://coveralls.io/github/ali1ariel/dreams_bank_api?branch=main)
