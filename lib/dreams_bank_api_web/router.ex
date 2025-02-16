@@ -12,5 +12,6 @@ defmodule DreamsBankApiWeb.Router do
     get "/accounts/number/:number", AccountController, :show_by_number
 
     post "/accounts/:account_number/deposit", BankController, :deposit
+    post "/accounts/:account_number/withdrawal", BankController, :withdrawal
   end
 end
