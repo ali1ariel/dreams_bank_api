@@ -10,5 +10,7 @@ defmodule DreamsBankApiWeb.Router do
 
     resources "/accounts", AccountController, except: [:new, :edit]
     get "/accounts/number/:number", AccountController, :show_by_number
+
+    post "/accounts/:account_number/deposit", BankController, :deposit
   end
 end
