@@ -9,7 +9,12 @@ defmodule DreamsBankApi.BankService do
   @type operation_response ::
           {:ok, Account.t() | map()}
           | {:error,
-             :not_found | :insufficient_funds | :invalid_amount | :same_account | String.t()}
+             :not_found
+             | :insufficient_funds
+             | :invalid_amount
+             | :same_account
+             | :not_defined
+             | String.t()}
 
   @doc """
   Performs a deposit operation with user-friendly error handling.
