@@ -4,7 +4,7 @@ defmodule DreamsBankApiWeb.BankController do
   alias DreamsBankApi.BankService
 
   def deposit(conn, %{"account_number" => account_number, "amount" => amount}) do
-    case BankService.deposit(account_number, amount) do
+    case choose_node(conn.assigns[:target_node], :deposit, [account_number, amount]) do
       {:ok, account} ->
         conn
         |> put_status(:ok)
@@ -79,5 +79,9 @@ defmodule DreamsBankApiWeb.BankController do
     end
   end
 
-  # def process_cluster(node)
+  def choose_node(nil, function, params), do: apply(BankService, function, params)
+
+  def choose_node(node, function, params) do
+    :rpc.call(node, DreamsBankApi.BankService, function, params)
+  end
 end

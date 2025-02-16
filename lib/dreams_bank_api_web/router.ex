@@ -3,6 +3,7 @@ defmodule DreamsBankApiWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug DreamsBankApiWeb.LoadBalancerPlug
   end
 
   scope "/api", DreamsBankApiWeb do
