@@ -78,4 +78,6 @@ defmodule DreamsBankApiWeb.BankController do
         |> json(%{error: "Invalid amount for transferences"})
     end
   end
+
+  def process_cluster(node)
 end
