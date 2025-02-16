@@ -10,6 +10,16 @@ defmodule DreamsBankApiWeb.BankJSON do
     }
   end
 
+  def transfer(%{from: from_account, to: to_account}) do
+    %{
+      data: %{
+        type: "transfer",
+        from_account: account_data(from_account),
+        to_account: account_data(to_account)
+      }
+    }
+  end
+
   defp account_data(%Account{} = account) do
     %{
       number: account.number,

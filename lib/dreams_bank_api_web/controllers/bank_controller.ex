@@ -45,4 +45,37 @@ defmodule DreamsBankApiWeb.BankController do
         |> json(%{error: "Invalid amount for withdrawal"})
     end
   end
+
+  def transfer(conn, %{
+        "from_account" => from_account,
+        "to_account" => to_account,
+        "amount" => amount
+      }) do
+    case BankService.transfer(from_account, to_account, amount) do
+      {:ok, %{from: from_updated, to: to_updated}} ->
+        conn
+        |> put_status(:ok)
+        |> render("transfer.json", %{from: from_updated, to: to_updated})
+
+      {:error, :not_found} ->
+        conn
+        |> put_status(:not_found)
+        |> json(%{error: "One or both accounts not found"})
+
+      {:error, :same_account} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> json(%{error: "Cannot transfer to the same account"})
+
+      {:error, :insufficient_funds} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> json(%{error: "Insufficient funds"})
+
+      {:error, :not_defined} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> json(%{error: "Invalid amount for transferences"})
+    end
+  end
 end

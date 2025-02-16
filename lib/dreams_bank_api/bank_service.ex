@@ -112,8 +112,8 @@ defmodule DreamsBankApi.BankService do
         {:error, :insufficient_funds}
 
       # coveralls-ignore-start
-      {:error, operation, %Ecto.Changeset{}, _} ->
-        {:error, operation, :not_defined}
+      {:error, _operation, %Ecto.Changeset{}, _} ->
+        {:error, :not_defined}
 
       error ->
         error
